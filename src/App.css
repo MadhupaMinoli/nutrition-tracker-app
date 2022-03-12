@@ -1,38 +1,56 @@
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  background-color: gray;
+  height: 100%;
+  width: 100%;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Nav-Bar css */
+
+.nav-bar {
+  height: 60px;
+  background-color: darkolivegreen;
+  color: aliceblue;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  font-weight: 800;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav-bar > :not(:last-child) {
+  margin-right: 10px;
+}
+
+/* Today view page */
+
+.today-view {
+  width: 80%;
+  background-color: darkgray;
+  padding: 10px;
+  margin: 0 10%;
+	height: calc(100% - 60px);
+	overflow-y: scroll;
+}
+
+.paper {
+	padding: 5px 25px 25px 25px;
+	background-color: darkolivegreen !important;
+	color: beige !important;
+}
+
+.card {
+	background-color: darkgrey !important;
+}
+
+.display-flex {
+	display: flex;
+}
+
+.flex-1 {
+	flex: 1;
 }
