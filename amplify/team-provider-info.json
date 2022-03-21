@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-caloriecounter-dev-230100-authRole",
+      "UnauthRoleArn": "arn:aws:iam::860934711355:role/amplify-caloriecounter-dev-230100-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::860934711355:role/amplify-caloriecounter-dev-230100-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-caloriecounter-dev-230100-deployment",
+      "UnauthRoleName": "amplify-caloriecounter-dev-230100-unauthRole",
+      "StackName": "amplify-caloriecounter-dev-230100",
+      "StackId": "arn:aws:cloudformation:us-east-1:860934711355:stack/amplify-caloriecounter-dev-230100/34ff8590-a22a-11ec-ba06-0e8f90e012a7",
+      "AmplifyAppId": "d3y4yk3q9kb13"
+    },
+    "categories": {
+      "auth": {
+        "caloriecounter193d3e03": {}
+      }
+    }
+  }
+}

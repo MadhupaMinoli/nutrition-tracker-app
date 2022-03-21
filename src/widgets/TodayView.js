@@ -1,23 +1,28 @@
 import { Accordion, AccordionDetails, AccordionSummary, Card, CardContent, Divider, IconButton, Input, Modal, Paper, Stack, Typography } from "@mui/material"
 import InfoCard from "../components/InfoCard"
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useState } from "react";
+import { useContext, useState } from "react";
 import FoodCard from "../components/FoodCard";
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import { Box, height } from "@mui/system";
 import FoodCal from "../components/FoodCal";
+import UserContex from "../store/user-contex";
 
 
 function TodayView() {
 	const [expanded, setExpanded] = useState(false);
-	const [open, setOpen] = useState(false);
+	const [meal, setMeal] = useState('');
+	const userData = useContext(UserContex);
 
-	const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => setMeal('');
 
 	const handleChange = (panel) => (event, isExpanded) => {
 		setExpanded(isExpanded ? panel : false);
 	};
+
+	const addToMeal = (calories) => {
+		console.log(`${calories} calories Meal added to ${meal}`)
+	}
 
 	return (<div className='today-view'>
 		<Paper elevation={3} className='paper'>
@@ -31,7 +36,7 @@ function TodayView() {
 			>
 				<InfoCard
 					header={{ title: "RDI", subheader: "Recomanded Daily Intake", avatar: "/favicon.png" }}
-					value="2500 Calories"
+					value={`${userData.rdi} Calories`}
 					description="The RDI (Recomanded Daily Intake) of calories calculated accourding to your body
 					wegiht, hight, age and gender. It will be varry with your helth and other medical conditions.
 					This value use to only for tracking purpose."
@@ -63,11 +68,11 @@ function TodayView() {
 					id="panel1bh-header"
 				>
 					<Typography variant="h5" sx={{ width: '33%', flexShrink: 0 }}>
-						Breakfirst
+						Breakfast
 					</Typography>
-					<Typography variant="h5" sx={{ color: 'text.secondary' }}>750 Calories</Typography>
+					<Typography variant="h6" sx={{ color: 'text.secondary' }}>750 Calories</Typography>
 					<Divider orientation="vertical" flexItem variant="middle" textAlign="center" sx={{width: 10}} />
-					<Typography variant="h5" sx={{ color: 'text.secondary' }}>15%</Typography>
+					<Typography variant="h6" sx={{ color: 'text.secondary' }}>15%</Typography>
 				</AccordionSummary>
 				<AccordionDetails>
 					<Stack
@@ -86,7 +91,7 @@ function TodayView() {
 							value="1000 Calories"
 						/>
 
-						<IconButton aria-label="delete" size="large" color="success" onClick={handleOpen}>
+						<IconButton aria-label="delete" size="large" color="success" onClick={setMeal.bind(null, 'break-first')}>
 							<FastfoodIcon />
 						</IconButton>
 					</Stack>
@@ -98,10 +103,12 @@ function TodayView() {
 					aria-controls="panel2bh-content"
 					id="panel2bh-header"
 				>
-					<Typography sx={{ width: '33%', flexShrink: 0 }}>Users</Typography>
-					<Typography sx={{ color: 'text.secondary' }}>
-						You are currently not an owner
+				<Typography variant="h5" sx={{ width: '33%', flexShrink: 0 }}>
+						Lunch
 					</Typography>
+					<Typography variant="h6" sx={{ color: 'text.secondary' }}>750 Calories</Typography>
+					<Divider orientation="vertical" flexItem variant="middle" textAlign="center" sx={{width: 10}} />
+					<Typography variant="h6" sx={{ color: 'text.secondary' }}>25%</Typography>
 				</AccordionSummary>
 				<AccordionDetails>
 					<Typography>
@@ -117,12 +124,12 @@ function TodayView() {
 					aria-controls="panel3bh-content"
 					id="panel3bh-header"
 				>
-					<Typography sx={{ width: '33%', flexShrink: 0 }}>
-						Advanced settings
+					<Typography variant="h5" sx={{ width: '33%', flexShrink: 0 }}>
+						Dinner
 					</Typography>
-					<Typography sx={{ color: 'text.secondary' }}>
-						Filtering has been entirely disabled for whole web server
-					</Typography>
+					<Typography variant="h6" sx={{ color: 'text.secondary' }}>750 Calories</Typography>
+					<Divider orientation="vertical" flexItem variant="middle" textAlign="center" sx={{width: 10}} />
+					<Typography variant="h6" sx={{ color: 'text.secondary' }}>15%</Typography>
 				</AccordionSummary>
 				<AccordionDetails>
 					<Typography>
@@ -137,8 +144,12 @@ function TodayView() {
 					aria-controls="panel4bh-content"
 					id="panel4bh-header"
 				>
-					<Typography sx={{ width: '33%', flexShrink: 0 }}>Personal data</Typography>
-				</AccordionSummary>
+					<Typography variant="h5" sx={{ width: '33%', flexShrink: 0 }}>
+						Snacks
+					</Typography>
+					<Typography variant="h6" sx={{ color: 'text.secondary' }}>750 Calories</Typography>
+					<Divider orientation="vertical" flexItem variant="middle" textAlign="center" sx={{width: 10}} />
+					<Typography variant="h6" sx={{ color: 'text.secondary' }}>15%</Typography>						</AccordionSummary>
 				<AccordionDetails>
 
 				</AccordionDetails>
@@ -146,13 +157,13 @@ function TodayView() {
 		</Paper>
 
 		<Modal
-        open={open}
+        open={meal}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <FoodCal></FoodCal>
-      </Modal>
+        <FoodCal addToMeal={addToMeal} closeCard={handleClose}></FoodCal>
+		</Modal>
 	</div>)
 }
 

@@ -1,0 +1,23 @@
+{
+	"day": "Tue Mar 15 2022 22:27:04 GMT+0530 (India Standard Time)",
+	"rdi": 3000,
+	"currentIntake": 2090,
+	"breakfirst": [
+		{"name": "Banana Muffing", "calories": 250},
+		{"name": "Fruite Juice", "calories": 10},
+		{"name": "Yogurt", "calories": 100}
+	],
+	"lunch": [
+		{"name": "Rice", "calories": 300},
+		{"name": "Chicken", "calories": 200},
+		{"name": "Ice Cream", "calories": 200}
+	],
+	"dinner": [
+		{"name": "Kottu", "calories": 500}
+	],
+	"snacks": [
+		{"name": "buiscuts", "calories": 100},
+		{"name": "tea", "calories": 100},
+		{"name": "tea", "calories": 100}
+	]
+}
