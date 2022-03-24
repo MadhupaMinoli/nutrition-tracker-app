@@ -52,6 +52,11 @@
     "dynamo9d586607": {
       "service": "DynamoDB",
       "providerPlugin": "awscloudformation"
+    },
+    "mealImageStorage": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
     }
   },
   "api": {

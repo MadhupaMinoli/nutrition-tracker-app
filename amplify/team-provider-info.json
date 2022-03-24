@@ -14,7 +14,8 @@
     },
     "categories": {
       "auth": {
-        "caloriecounter193d3e03": {}
+        "caloriecounter193d3e03": {},
+        "true": {}
       },
       "function": {
         "getUserData": {

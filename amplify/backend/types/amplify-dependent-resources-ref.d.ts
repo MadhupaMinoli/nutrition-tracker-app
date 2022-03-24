@@ -26,6 +26,10 @@ export type AmplifyDependentResourcesAttributes = {
             "PartitionKeyName": "string",
             "PartitionKeyType": "string",
             "Region": "string"
+        },
+        "mealImageStorage": {
+            "BucketName": "string",
+            "Region": "string"
         }
     },
     "api": {

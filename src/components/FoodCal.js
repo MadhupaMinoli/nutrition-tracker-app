@@ -1,6 +1,8 @@
 import { Button, Card, CardContent, Input, Stack, Typography } from "@mui/material";
+import { Storage } from "aws-amplify";
 import { Box } from "@mui/system";
 import { useState } from "react";
+import { v4 as uuid} from "uuid";
 
 const style = {
 	position: 'absolute',
@@ -11,16 +13,25 @@ const style = {
 	background: '#fff',
 	border: '2px solid #000',
 	boxShadow: 24,
-	maxHeight: 500,
 	p: 4,
 };
 
 function FoodCal({ addToMeal, closeCard }) {
 	let [{calories, name}, updateNtrData] = useState({});
 	const [imgSrc, setImg] = useState('');
+	const [imgName, setImgName] = useState('');
+	const [imgData, setImgData] = useState('');
+
+
+	const uploadImage = async () => {
+		const { key } = await Storage.put(imgName, imgData )
+		console.log("uploaded", key);
+	}
 
 	const updateImg = (ev) => {
 		const [file] = ev.target.files
+		setImgData(file);
+    setImgName(`${uuid()}.${file.name.split('.').pop()}`);
 
 		if (file) {
 			// document.getElementById('food-image').src = URL.createObjectURL(file)
@@ -44,9 +55,11 @@ function FoodCal({ addToMeal, closeCard }) {
 				<Card>
 					<CardContent>
 						<img id='food-image' height={300} width={300} src={imgSrc} />
+						<Button variant="contained" onClick={uploadImage}> Upload Image </Button>
 					</CardContent>
 				</Card>
 			)}
+ 
 
 			{imgSrc && calories && (
 				<Stack direction="row" spacing={2} sx={{ marginTop: 2 }}>
@@ -55,7 +68,7 @@ function FoodCal({ addToMeal, closeCard }) {
 						<Typography variant="h6" >{calories} Calories</Typography>
 					</Stack>
 					<Button variant="contained" color="success" onClick={addToMeal.bind(null, name, calories)}> Accept </Button>
-					<Button variant="outlined" color="error" onClick={closeCard}> Regect </Button>
+					<Button variant="outlined" color="error" onClick={closeCard}> Reject </Button>
 				</Stack>
 			)}
 		</Box>

@@ -38,28 +38,28 @@ function TodayView() {
 					header={{ title: "RDI", subheader: "Recomanded Daily Intake", avatar: "/favicon.png" }}
 					value={`${userData.rdi} Calories`}
 					description="The RDI (Recomanded Daily Intake) of calories calculated accourding to your body
-					wegiht, hight, age and gender. It will be varry with your helth and other medical conditions.
+					wegiht, height, age and gender. It will be vary with your health and other medical conditions.
 					This value use to only for tracking purpose."
 				/>
 
 				<InfoCard
 					header={{ title: "Current Intake", avatar: "/favicon.png" }}
 					value="1000 Calories"
-					description="The RDI (Recomanded Daily Intake) of calories calculated accourding to your body
-					wegiht, hight, age and gender. It will be varry with your helth and other medical conditions.
-					This value use to only for tracking purpose."
+					description="The current intake of calories calculated accourding to your accepted meals after
+					 checking it's calorie count. It is the total intake of 4 meals - Breakfast, Lunch, Dinner and
+					  Snack throughout the day."
 				/>
 
 				<InfoCard
-					header={{ title: "Day Summery", subheader: "Percentage of daily requrement", avatar: "/favicon.png" }}
+					header={{ title: "Day Summary", subheader: "Percentage of Daily Requrement", avatar: "/favicon.png" }}
 					value="50%"
-					description="Eat rest of 50% end of the day. You have to get lunch and dinner"
+					description="Eat rest of the calories at end of the day. You can get more for breakfast, lunch, dinner and snacks"
 				/>
 			</Stack>
 		</Paper>
 
 		<Paper elevation={3} className='paper'>
-			<h3>Meal Records</h3>
+			<h3>Daily Meal Records</h3>
 
 			<Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
 				<AccordionSummary
