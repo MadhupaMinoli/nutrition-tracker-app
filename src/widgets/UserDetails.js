@@ -14,7 +14,6 @@ const style = {
 	background: '#fff',
 	border: '2px solid #000',
 	boxShadow: 24,
-	maxHeight: 400,
 	p: 4,
 };
 
@@ -22,24 +21,17 @@ function UserDetails({ isEditing }) {
 	const userData = useContext(UserContex);
 	const [editing, setEditing] = useState(isEditing);
 
-
-	useEffect(() => {
-		userData.updateUserData();
-	}, [editing, isEditing]);
-
-
 	// Actions
 	const toggleEditing = () => { setEditing(state => !state) };
 
 	const saveProfile = () => { 
 		console.log('Current user data >> ', userData);
-
+		userData.saveUserData();
 		setEditing(false);
-		setTimeout(userData.setUserData.bind(null, userData), 1000);
 	};
 
 	const changeUserData = (ev) => { 
-		userData.setUserData(ud => Object.assign({}, ud, { [ev.target.name]: ev.target.value }));
+		userData.updateUserData({ [ev.target.name]: ev.target.value });
 	};
 
 
@@ -53,9 +45,11 @@ function UserDetails({ isEditing }) {
 						<IconButton aria-label="save" size="large" color="primary" onClick={saveProfile}>
 							<Save fontSize="inherit" />
 						</IconButton>
-						<IconButton aria-label="cancel" size="large" color="secondary" onClick={toggleEditing}>
-							<Cancel fontSize="inherit" />
-						</IconButton>
+						{!isEditing && (
+							<IconButton aria-label="cancel" size="large" color="secondary" onClick={toggleEditing}>
+								<Cancel fontSize="inherit" />
+							</IconButton>
+						)}
 					</>
 				) : (
 					<IconButton aria-label="edit" size="large" color="secondary" onClick={toggleEditing}>
@@ -160,6 +154,7 @@ function UserDetails({ isEditing }) {
 							value={userData.activityLevel}
 							size="small"
 							sx={{ width: '195px' }}
+							defaultValue={"Lightly Active"}
 							onChange={changeUserData}
 						>
 							{Object.keys(activityLevels).map((key) => {

@@ -9,11 +9,18 @@
       "UnauthRoleName": "amplify-caloriecounter-dev-230100-unauthRole",
       "StackName": "amplify-caloriecounter-dev-230100",
       "StackId": "arn:aws:cloudformation:us-east-1:860934711355:stack/amplify-caloriecounter-dev-230100/34ff8590-a22a-11ec-ba06-0e8f90e012a7",
-      "AmplifyAppId": "d3y4yk3q9kb13"
+      "AmplifyAppId": "d3y4yk3q9kb13",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-caloriecounter-dev-230100-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
         "caloriecounter193d3e03": {}
+      },
+      "function": {
+        "getUserData": {
+          "deploymentBucketName": "amplify-caloriecounter-dev-230100-deployment",
+          "s3Key": "amplify-builds/getUserData-326e5434766866744651-build.zip"
+        }
       }
     }
   }

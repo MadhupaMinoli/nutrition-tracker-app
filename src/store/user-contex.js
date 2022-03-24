@@ -1,5 +1,9 @@
+import { Auth, API } from "aws-amplify";
 import { createContext, useEffect, useState } from "react";
 import { activityLevels } from "../consts";
+
+const apiName = "apif78eeddf"
+const path = "/users"
 
 const userData = {
 	name: "",
@@ -7,15 +11,19 @@ const userData = {
 	gender: "",
 	height: 0,
 	weight: 0,
-	activityLevel: ""
+	activityLevel: "",
+	configed: false,
+	isLoading: true
 }
 
 const calculatedUserData = {
 	bmr: 0,
 	rdi: 0,
 
+	saveUserData: () => {},
+	updateUserData: () => {},
+	getUserData: () => {},
 	setUserData: () => {},
-	updateUserData: () => {}
 }
 
 function calculateBMR({gender, weight, height, age}) {
@@ -35,20 +43,44 @@ const UserContex = createContext({...userData, ...calculatedUserData});
 export function UserContexProvider(props) {
 	const [userDataState, setUserData] = useState(userData);
 
-	const updateUserData = () => {
+	const getUserData = () => {
 		console.log("Retriving user data");
-		var myRequest = new Request('/user.json');
 
-		fetch(myRequest).then(function (response) {
-			return response.json();
-		}).then(function (response) {
-			setUserData(response);
+		Auth.currentUserInfo().then(info => {
+			API.get(apiName, `${path}/${info.id}`).then(data => {
+				console.log("User data: ", data);
+
+				data.isLoading = false;
+				updateUserData(data);
+			}).catch(e => {
+				console.error("User fetching error: ", e);
+			});
+		});
+	}
+
+	const saveUserData = () => {
+		updateUserData({configed: true})
+
+		Auth.currentUserInfo().then(info => {
+			API.post(apiName, `${path}`, {
+				body: {id: info.id, ...userDataState, configed: true}
+			}).then(data => {
+				console.log("User data updated: ", data);
+			}).catch(e => {
+				console.error("User data updating error: ", e);
+			});
+		});
+	}
+
+	const updateUserData = (userData) => {
+		setUserData((oUserData) => {
+			return {...oUserData, ...userData};
 		});
 	}
 
 
 	useEffect(() => {
-		updateUserData();
+		getUserData();
 	}, [props]);
 
 
@@ -58,8 +90,10 @@ export function UserContexProvider(props) {
 		bmr,
 		rdi: calculateRDI(bmr, userDataState.activityLevel),
 
+		updateUserData,
+		getUserData,
+		saveUserData,
 		setUserData,
-		updateUserData
 	}
 
 	return (

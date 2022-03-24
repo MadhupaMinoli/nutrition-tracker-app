@@ -157,12 +157,14 @@ function TodayView() {
 		</Paper>
 
 		<Modal
-        open={meal}
+        open={!!meal}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <FoodCal addToMeal={addToMeal} closeCard={handleClose}></FoodCal>
+				<div>
+        	<FoodCal addToMeal={addToMeal} closeCard={handleClose}></FoodCal>
+				</div>
 		</Modal>
 	</div>)
 }
