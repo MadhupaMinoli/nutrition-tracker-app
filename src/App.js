@@ -17,21 +17,21 @@ function App() {
 
   return (
 		<Authenticator>
-		{({ signOut, user }) => (
-			<div className="App">
-				{userData.isLoading ? 
-					<h3>Authenticating...</h3> : (<>
-					{userData.configed ? <>
-						<NavBar signOutFunc={signOut}/>
-						<TodayView/>
-					</> : <>
-						<h3>Add user details</h3>
-						<UserDetails isEditing={true} />
-					</>}
-				</>)}
-			</div>
-		)}
-	</Authenticator>
+			{({ signOut, user }) => (
+				<div className="App">
+					{userData.isLoading ? 
+						<h3>Authenticating...</h3> : (<>
+						{userData.configed ? <>
+							<NavBar signOutFunc={signOut}/>
+							<TodayView/>
+						</> : <>
+							<h3>Add user details</h3>
+							<UserDetails isEditing={true} />
+						</>}
+					</>)}
+				</div>
+			)}
+		</Authenticator>
   );
 }
 

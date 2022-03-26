@@ -1,16 +1,15 @@
-import { styled } from '@mui/material/styles';
-import { Avatar, Card, CardContent, CardHeader, Collapse, IconButton, Typography } from "@mui/material"
+import { Avatar, Card, CardContent, CardHeader, Typography } from "@mui/material"
 
-function FoodCard({header, value}) {
+function FoodCard({name, calories, imageURL}) {
 	return (
 		<Card sx={{ width: '100%' }} className="card display-flex">
 			<CardHeader
-				avatar={<Avatar src={header.avatar} />}
-				title={header.title}
-				subheader={header.subheader}
+				avatar={<Avatar src={imageURL} />}
+				title={name}
+				className='flex-1'
 			/>
-			<CardContent className='display-flex'>
-				<Typography variant="h6" color="text.secondary" className='flex-1'> {value} </Typography>
+			<CardContent>
+				<Typography variant="h6" color="text.secondary"> {calories} Calories </Typography>
 			</CardContent>
 		</Card>
 	)

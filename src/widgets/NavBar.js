@@ -1,14 +1,16 @@
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { Avatar, Button, Modal, TextField, Typography } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import MealRecContex from '../store/meal-records-context';
 import UserContex from '../store/user-contex';
 import UserDetails from './UserDetails';
 
 function NavBar({signOutFunc}) {
-	const [value, setValue] = useState(Date.now());
+	const [selectedDate, setDate] = useState(Date.now());
 	const [open, setOpen] = useState(false);
 	const userData = useContext(UserContex);
+	const mealData = useContext(MealRecContex);
 
 	const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -19,6 +21,9 @@ function NavBar({signOutFunc}) {
 		// window.location.reload();
 	};
 
+	useEffect(() => {
+		mealData.getMealRecord(selectedDate);
+	}, [selectedDate]);
 
 	return (
 		<div className='nav-bar'>
@@ -28,10 +33,9 @@ function NavBar({signOutFunc}) {
 
 			<LocalizationProvider dateAdapter={AdapterDateFns}>
 				<DatePicker
-					value={value}
+					value={selectedDate}
 					onChange={(newValue) => {
-						console.log(newValue)
-						setValue(newValue);
+						setDate(newValue);
 					}}
 					renderInput={(params) => <TextField {...params} />}
 				/>

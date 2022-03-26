@@ -1,23 +1,22 @@
 {
-	"day": "Tue Mar 15 2022 22:27:04 GMT+0530 (India Standard Time)",
-	"rdi": 3000,
-	"currentIntake": 2090,
+	"date": "Tue Mar 15 2022 22:27:04 GMT+0530 (India Standard Time)",
+	"rdi": 3000, 
 	"breakfirst": [
-		{"name": "Banana Muffing", "calories": 250},
-		{"name": "Fruite Juice", "calories": 10},
-		{"name": "Yogurt", "calories": 100}
+		{"name": "Banana Muffing", "calories": 250, "imageURL": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"},
+		{"name": "Fruite Juice", "calories": 10, "imageURL": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Zm9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"},
+		{"name": "Yogurt", "calories": 100, "imageURL": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Zm9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"}
 	],
 	"lunch": [
-		{"name": "Rice", "calories": 300},
-		{"name": "Chicken", "calories": 200},
-		{"name": "Ice Cream", "calories": 200}
+		{"name": "Rice", "calories": 300, "imageURL": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Zm9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"},
+		{"name": "Chicken", "calories": 200, "imageURL": ""},
+		{"name": "Ice Cream", "calories": 200, "imageURL": ""}
 	],
 	"dinner": [
-		{"name": "Kottu", "calories": 500}
+		{"name": "Kottu", "calories": 500, "imageURL": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Zm9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"}
 	],
 	"snacks": [
-		{"name": "buiscuts", "calories": 100},
-		{"name": "tea", "calories": 100},
-		{"name": "tea", "calories": 100}
+		{"name": "buiscuts", "calories": 100, "imageURL": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8Zm9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"},
+		{"name": "tea", "calories": 100, "imageURL": ""},
+		{"name": "tea", "calories": 100, "imageURL": ""}
 	]
 }

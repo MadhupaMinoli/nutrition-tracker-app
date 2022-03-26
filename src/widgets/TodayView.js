@@ -1,18 +1,21 @@
-import { Accordion, AccordionDetails, AccordionSummary, Card, CardContent, Divider, IconButton, Input, Modal, Paper, Stack, Typography } from "@mui/material"
-import InfoCard from "../components/InfoCard"
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useContext, useState } from "react";
-import FoodCard from "../components/FoodCard";
-import FastfoodIcon from '@mui/icons-material/Fastfood';
-import { Box, height } from "@mui/system";
+import { Modal, Paper, Stack } from "@mui/material"
+import InfoCard from "../components/InfoCard";
+import { useContext, useEffect, useState } from "react";
 import FoodCal from "../components/FoodCal";
 import UserContex from "../store/user-contex";
+import MealRecord from "../components/MealRecord";
+import MealRecContex from "../store/meal-records-context";
 
+const meals = ["breakfirst", "lunch", "dinner", "snacks"];
 
-function TodayView() {
+function TodayView({date}) {
 	const [expanded, setExpanded] = useState(false);
 	const [meal, setMeal] = useState('');
 	const userData = useContext(UserContex);
+	const mealRecords = useContext(MealRecContex);
+	// const [mealRecords, setMealRecords] = useState({});
+	
+	const rdi = mealRecords.rdi || userData.rdi;
 
   const handleClose = () => setMeal('');
 
@@ -20,8 +23,9 @@ function TodayView() {
 		setExpanded(isExpanded ? panel : false);
 	};
 
-	const addToMeal = (calories) => {
-		console.log(`${calories} calories Meal added to ${meal}`)
+	const addToMeal = ({name, calories, imageURL}) => {
+		console.log(`${calories} calories Meal added to ${meal}`);
+		mealRecords.addFoodRecord(meal, {name, calories, imageURL});
 	}
 
 	return (<div className='today-view'>
@@ -36,7 +40,7 @@ function TodayView() {
 			>
 				<InfoCard
 					header={{ title: "RDI", subheader: "Recomanded Daily Intake", avatar: "/favicon.png" }}
-					value={`${userData.rdi} Calories`}
+					value={`${rdi} Calories`}
 					description="The RDI (Recomanded Daily Intake) of calories calculated accourding to your body
 					wegiht, height, age and gender. It will be vary with your health and other medical conditions.
 					This value use to only for tracking purpose."
@@ -44,7 +48,7 @@ function TodayView() {
 
 				<InfoCard
 					header={{ title: "Current Intake", avatar: "/favicon.png" }}
-					value="1000 Calories"
+					value={`${mealRecords.currentIntake} Calories`}
 					description="The current intake of calories calculated accourding to your accepted meals after
 					 checking it's calorie count. It is the total intake of 4 meals - Breakfast, Lunch, Dinner and
 					  Snack throughout the day."
@@ -52,7 +56,7 @@ function TodayView() {
 
 				<InfoCard
 					header={{ title: "Day Summary", subheader: "Percentage of Daily Requrement", avatar: "/favicon.png" }}
-					value="50%"
+					value={`${rdi && parseInt(mealRecords.currentIntake * 100 / rdi)}%`}
 					description="Eat rest of the calories at end of the day. You can get more for breakfast, lunch, dinner and snacks"
 				/>
 			</Stack>
@@ -61,99 +65,20 @@ function TodayView() {
 		<Paper elevation={3} className='paper'>
 			<h3>Daily Meal Records</h3>
 
-			<Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-				<AccordionSummary
-					expandIcon={<ExpandMoreIcon />}
-					aria-controls="panel1bh-content"
-					id="panel1bh-header"
-				>
-					<Typography variant="h5" sx={{ width: '33%', flexShrink: 0 }}>
-						Breakfast
-					</Typography>
-					<Typography variant="h6" sx={{ color: 'text.secondary' }}>750 Calories</Typography>
-					<Divider orientation="vertical" flexItem variant="middle" textAlign="center" sx={{width: 10}} />
-					<Typography variant="h6" sx={{ color: 'text.secondary' }}>15%</Typography>
-				</AccordionSummary>
-				<AccordionDetails>
-					<Stack
-						direction="column"
-						spacing={1}
-						justifyContent="center"
-						alignItems="center"
-					>
-						<FoodCard
-							header={{ title: "Rice and Curry", avatar: "/favicon.png" }}
-							value="2500 Calories"
-						/>
-
-						<FoodCard
-							header={{ title: "Bunana", avatar: "/favicon.png" }}
-							value="1000 Calories"
-						/>
-
-						<IconButton aria-label="delete" size="large" color="success" onClick={setMeal.bind(null, 'break-first')}>
-							<FastfoodIcon />
-						</IconButton>
-					</Stack>
-				</AccordionDetails>
-			</Accordion>
-			<Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-				<AccordionSummary
-					expandIcon={<ExpandMoreIcon />}
-					aria-controls="panel2bh-content"
-					id="panel2bh-header"
-				>
-				<Typography variant="h5" sx={{ width: '33%', flexShrink: 0 }}>
-						Lunch
-					</Typography>
-					<Typography variant="h6" sx={{ color: 'text.secondary' }}>750 Calories</Typography>
-					<Divider orientation="vertical" flexItem variant="middle" textAlign="center" sx={{width: 10}} />
-					<Typography variant="h6" sx={{ color: 'text.secondary' }}>25%</Typography>
-				</AccordionSummary>
-				<AccordionDetails>
-					<Typography>
-						Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus,
-						varius pulvinar diam eros in elit. Pellentesque convallis laoreet
-						laoreet.
-					</Typography>
-				</AccordionDetails>
-			</Accordion>
-			<Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-				<AccordionSummary
-					expandIcon={<ExpandMoreIcon />}
-					aria-controls="panel3bh-content"
-					id="panel3bh-header"
-				>
-					<Typography variant="h5" sx={{ width: '33%', flexShrink: 0 }}>
-						Dinner
-					</Typography>
-					<Typography variant="h6" sx={{ color: 'text.secondary' }}>750 Calories</Typography>
-					<Divider orientation="vertical" flexItem variant="middle" textAlign="center" sx={{width: 10}} />
-					<Typography variant="h6" sx={{ color: 'text.secondary' }}>15%</Typography>
-				</AccordionSummary>
-				<AccordionDetails>
-					<Typography>
-						Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit
-						amet egestas eros, vitae egestas augue. Duis vel est augue.
-					</Typography>
-				</AccordionDetails>
-			</Accordion>
-			<Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-				<AccordionSummary
-					expandIcon={<ExpandMoreIcon />}
-					aria-controls="panel4bh-content"
-					id="panel4bh-header"
-				>
-					<Typography variant="h5" sx={{ width: '33%', flexShrink: 0 }}>
-						Snacks
-					</Typography>
-					<Typography variant="h6" sx={{ color: 'text.secondary' }}>750 Calories</Typography>
-					<Divider orientation="vertical" flexItem variant="middle" textAlign="center" sx={{width: 10}} />
-					<Typography variant="h6" sx={{ color: 'text.secondary' }}>15%</Typography>						</AccordionSummary>
-				<AccordionDetails>
-
-				</AccordionDetails>
-			</Accordion>
+			{meals.map((meal) => {
+				if (mealRecords[meal]) {
+					return <MealRecord
+						key={meal}
+						mealId={meal}
+						mealData={mealRecords[meal]}
+						isExpanded={expanded === meal}
+						rdi={userData.rdi}
+						onAddFood={setMeal}
+						onExpand={handleChange(meal)}
+						mealName={meal.toUpperCase()}
+					/>
+				}
+			})}
 		</Paper>
 
 		<Modal

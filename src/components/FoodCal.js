@@ -67,7 +67,7 @@ function FoodCal({ addToMeal, closeCard }) {
 						<Typography variant="p" >{name}</Typography>
 						<Typography variant="h6" >{calories} Calories</Typography>
 					</Stack>
-					<Button variant="contained" color="success" onClick={addToMeal.bind(null, name, calories)}> Accept </Button>
+					<Button variant="contained" color="success" onClick={addToMeal.bind(null, {name, calories, imgSrc})}> Accept </Button>
 					<Button variant="outlined" color="error" onClick={closeCard}> Reject </Button>
 				</Stack>
 			)}
