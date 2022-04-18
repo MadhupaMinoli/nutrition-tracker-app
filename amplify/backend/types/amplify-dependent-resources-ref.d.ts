@@ -16,6 +16,12 @@ export type AmplifyDependentResourcesAttributes = {
             "Arn": "string",
             "Region": "string",
             "LambdaExecutionRole": "string"
+        },
+        "mealRecordsHandler": {
+            "Name": "string",
+            "Arn": "string",
+            "Region": "string",
+            "LambdaExecutionRole": "string"
         }
     },
     "storage": {
@@ -29,6 +35,16 @@ export type AmplifyDependentResourcesAttributes = {
         },
         "mealImageStorage": {
             "BucketName": "string",
+            "Region": "string"
+        },
+        "dynamo106d96a1": {
+            "Name": "string",
+            "Arn": "string",
+            "StreamArn": "string",
+            "PartitionKeyName": "string",
+            "PartitionKeyType": "string",
+            "SortKeyName": "string",
+            "SortKeyType": "string",
             "Region": "string"
         }
     },

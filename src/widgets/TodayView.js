@@ -13,7 +13,6 @@ function TodayView({date}) {
 	const [meal, setMeal] = useState('');
 	const userData = useContext(UserContex);
 	const mealRecords = useContext(MealRecContex);
-	// const [mealRecords, setMealRecords] = useState({});
 	
 	const rdi = mealRecords.rdi || userData.rdi;
 

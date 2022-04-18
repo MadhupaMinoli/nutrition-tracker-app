@@ -7,6 +7,13 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/mealRecords": {
+      "name": "/mealRecords",
+      "lambdaFunction": "mealRecordsHandler",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

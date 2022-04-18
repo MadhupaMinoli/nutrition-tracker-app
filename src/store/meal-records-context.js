@@ -1,7 +1,8 @@
 import { createContext, useState } from "react";
+import { Auth, API } from "aws-amplify";
 
 const apiName = "apif78eeddf"
-const path = "/users"
+const path = "/mealRecords"
 const meals = ["breakfirst", "lunch", "dinner", "snacks"];
 
 const mealRecordData = {
@@ -42,11 +43,24 @@ export function MealRecContextProvider({children}) {
 	const getMealRecord = (date) => {
 		updateStateData({date: date, isLoading: true});
 
+		Auth.currentUserInfo().then(info => {
+			API.get(apiName, `${path}/object/${info.id}/${date}`).then(data => {
+				console.log("Meal record data: ", data);
 
-		fetch('/day-report.json')
-		.then(res => {return res.json()})
-		.then(setMealRecState)
-		.catch(e => updateStateData({error: e}));
+				if (Object.keys(data).length) {
+					setMealRecState(data);
+				} else {
+					updateStateData({isLoading: false})
+				}
+			}).catch(e => {
+				console.error("Meal Record fetching error: ", e);
+			});
+		}).catch(console.error);
+
+		// fetch('/day-report.json')
+		// .then(res => {return res.json()})
+		// .then(setMealRecState)
+		// .catch(e => updateStateData({error: e}));
 	}
 
 	const addFoodRecord = (meal, {name, calories, imageURL}) => {
@@ -56,6 +70,15 @@ export function MealRecContextProvider({children}) {
 		});
 
 		//Send data
+		Auth.currentUserInfo().then(info => {
+			API.post(apiName, `${path}`, {
+				body: {id: info.id, ...mealRecState}
+			}).then(data => {
+				console.log("Meal record updated: ", data);
+			}).catch(e => {
+				console.error("Meal record setting error: ", e);
+			});
+		}).catch(console.error);
 	}
 
 	const currentIntake = meals.reduce((calories, meal) => {

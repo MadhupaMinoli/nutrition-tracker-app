@@ -7,7 +7,7 @@ import UserContex from '../store/user-contex';
 import UserDetails from './UserDetails';
 
 function NavBar({signOutFunc}) {
-	const [selectedDate, setDate] = useState(Date.now());
+	const [selectedDate, setDate] = useState(new Date());
 	const [open, setOpen] = useState(false);
 	const userData = useContext(UserContex);
 	const mealData = useContext(MealRecContex);
@@ -22,7 +22,9 @@ function NavBar({signOutFunc}) {
 	};
 
 	useEffect(() => {
-		mealData.getMealRecord(selectedDate);
+		const date = selectedDate.toDateString();
+		console.log("Date chaged: ", date);
+		mealData.getMealRecord(date);
 	}, [selectedDate]);
 
 	return (

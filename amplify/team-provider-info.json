@@ -21,6 +21,10 @@
         "getUserData": {
           "deploymentBucketName": "amplify-caloriecounter-dev-230100-deployment",
           "s3Key": "amplify-builds/getUserData-326e5434766866744651-build.zip"
+        },
+        "mealRecordsHandler": {
+          "deploymentBucketName": "amplify-caloriecounter-dev-230100-deployment",
+          "s3Key": "amplify-builds/mealRecordsHandler-2b43686176386d676e69-build.zip"
         }
       }
     }

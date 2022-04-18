@@ -1,0 +1,22 @@
+{
+  "resourceName": "dynamo106d96a1",
+  "tableName": "mealRecords",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "date",
+    "fieldType": "string"
+  },
+  "gsi": [
+    {
+      "name": "userId",
+      "partitionKey": {
+        "fieldName": "date",
+        "fieldType": "string"
+      }
+    }
+  ],
+  "triggerFunctions": []
+}

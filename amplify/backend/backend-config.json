@@ -46,6 +46,25 @@
           }
         }
       ]
+    },
+    "mealRecordsHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "dynamo106d96a1",
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "attributeEnvMap": {
+            "Name": "TABLE_NAME",
+            "Arn": "TABLE_ARN"
+          }
+        }
+      ]
     }
   },
   "storage": {
@@ -57,6 +76,10 @@
       "service": "S3",
       "providerPlugin": "awscloudformation",
       "dependsOn": []
+    },
+    "dynamo106d96a1": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
     }
   },
   "api": {
@@ -67,6 +90,14 @@
         {
           "category": "function",
           "resourceName": "getUserData",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "mealRecordsHandler",
           "attributes": [
             "Name",
             "Arn"
