@@ -32,7 +32,7 @@ const MealRecContex = createContext({
 export default MealRecContex;
 
 export function MealRecContextProvider({children}) {
-	const [mealRecState, setMealRecState] = useState(mealRecordData);
+	const [mealRecState, setMealRecState] = useState({...mealRecordData});
 
 	const updateStateData = (data) => {
 		setMealRecState((preData) => {
@@ -50,9 +50,12 @@ export function MealRecContextProvider({children}) {
 				if (Object.keys(data).length) {
 					setMealRecState(data);
 				} else {
-					updateStateData({isLoading: false})
+					setMealRecState({...mealRecordData});
 				}
+
+				updateStateData({isLoading: false})
 			}).catch(e => {
+				updateStateData({isLoading: false, error: false})
 				console.error("Meal Record fetching error: ", e);
 			});
 		}).catch(console.error);

@@ -24,7 +24,7 @@ function FoodCal({ addToMeal, closeCard }) {
 
 
 	const uploadImage = async () => {
-		const { key } = await Storage.put(imgName, imgData )
+		const { key } = await Storage.put(imgName, imgData );
 		console.log("uploaded", key);
 	}
 

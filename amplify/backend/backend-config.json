@@ -65,6 +65,12 @@
           }
         }
       ]
+    },
+    "predictionHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": []
     }
   },
   "storage": {
@@ -98,6 +104,14 @@
         {
           "category": "function",
           "resourceName": "mealRecordsHandler",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "predictionHandler",
           "attributes": [
             "Name",
             "Arn"

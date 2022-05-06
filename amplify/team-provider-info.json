@@ -28,5 +28,38 @@
         }
       }
     }
+  },
+  "test": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-caloriecounter-test-222219-authRole",
+      "UnauthRoleArn": "arn:aws:iam::795013316719:role/amplify-caloriecounter-test-222219-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::795013316719:role/amplify-caloriecounter-test-222219-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-caloriecounter-test-222219-deployment",
+      "UnauthRoleName": "amplify-caloriecounter-test-222219-unauthRole",
+      "StackName": "amplify-caloriecounter-test-222219",
+      "StackId": "arn:aws:cloudformation:us-west-2:795013316719:stack/amplify-caloriecounter-test-222219/ee076010-bf37-11ec-9afa-06cd41409279",
+      "AmplifyAppId": "d1i1b3vhdw1xzg"
+    },
+    "categories": {
+      "auth": {
+        "caloriecounter193d3e03": {}
+      },
+      "function": {
+        "getUserData": {
+          "deploymentBucketName": "amplify-caloriecounter-test-222219-deployment",
+          "s3Key": "amplify-builds/getUserData-326e5434766866744651-build.zip"
+        },
+        "mealRecordsHandler": {
+          "deploymentBucketName": "amplify-caloriecounter-test-222219-deployment",
+          "s3Key": "amplify-builds/mealRecordsHandler-2b43686176386d676e69-build.zip"
+        },
+        "predictionHandler": {
+          "endpointName": "calorie-prediction-endpoint",
+          "deploymentBucketName": "amplify-caloriecounter-test-222219-deployment",
+          "s3Key": "amplify-builds/predictionHandler-4742772f766664397866-build.zip"
+        }
+      }
+    }
   }
 }
